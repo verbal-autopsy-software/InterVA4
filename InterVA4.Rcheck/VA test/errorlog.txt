@@ -1,2 +1,0 @@
-Error log built for InterVA 2013-10-12 11:43:09 
-100128  Error in indicators: No symptoms specified  
