@@ -1,0 +1,4 @@
+Warning log built for InterVA 2013-10-12 11:43:09 
+100078     exert_br   not flagged in category  br_less  - updated in working file 
+100096     exert_br   not flagged in category  br_less  - updated in working file 
+100220     exert_br   not flagged in category  br_less  - updated in working file 

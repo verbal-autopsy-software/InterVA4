@@ -1,0 +1,4 @@
+load("/Users/bhoule/Dropbox/va/Richard/InterVA4/data/probbase.rda")
+ls
+ls()
+probbase[1:10,]

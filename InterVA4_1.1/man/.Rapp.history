@@ -1,0 +1,5 @@
+library(InterVA4)
+help.search(package="InterVA4")
+help(package="InterVA4")
+data(causetext)
+causetext
