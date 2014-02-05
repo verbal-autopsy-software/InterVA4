@@ -1,7 +1,7 @@
 Package: InterVA4
 Type: Package
 Title: Replicate and analyse InterVA4
-Version: 1.0
+Version: 1.1
 Date: 2012-12-18
 Author: Zehang LI, Tyler McCormick, Sam Clark
 Maintainer: Zehang LI <lizehang@uw.edu>
