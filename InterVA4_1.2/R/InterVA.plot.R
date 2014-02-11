@@ -8,7 +8,14 @@ Population.summary<-function (va, noplot = FALSE, type="both",  min.prob = 0.01,
 		return
 	}
     ## Initialize the population distribution
-	dist <- rep(0, length(unlist(va[[1]][14])))
+    dist <- NULL
+    for(i in 1:length(va)){
+        if(!is.null(va[[i]][14])){	
+	        dist <- rep(0, length(unlist(va[[i]][14])))	
+	        break
+        }
+    } 
+    if(is.null(dist)){cat("No va probability found in input"); return}   
     ## Add the probabilities together
 	for(i in 1:length(va)){
         if(!is.null(va[[i]][14])) dist <- dist + unlist(va[[i]][14])
