@@ -254,14 +254,11 @@ save.va.prob <- function(x, filename){
         # Normalize A group
         if(sum(prob[1:3]) > 0) prob[1:3] <- prob[1:3]/sum(prob[1:3])
         # Normalize B group 
-		if(sum(prob[4:63]) > 0 & length(which(prob[4:63]>0)) > 1) prob[4:63] <- prob[4:63]/sum(prob[4:63])
+		if(sum(prob[4:63]) > 0) prob[4:63] <- prob[4:63]/sum(prob[4:63])
         # delete too small probs
         prob[prob < 0.000001] <- 0
         }
-        
-        
-        
-        
+              
         names(prob) <- causetext[,2]
         prob_A <- prob[1:3] # Extracting only A_group
         prob_B <- prob[4:63] # Extracting only COD
