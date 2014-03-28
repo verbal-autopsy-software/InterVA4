@@ -91,21 +91,36 @@ save.va.prob <- function(x, filename){
     Input <- as.matrix(Input)
     ## Check if there is any data at all
     if(dim(Input)[1] < 1){
-        cat("error: no data input")
-        return(NULL)
+        stop("error: no data input")
     }
     N <- dim(Input)[1]  ## Number of data
     S <- dim(Input)[2]  ## Length of individial field
     ##  Check if the length of input variable matches the probbase dataset
     if(S != dim(probbase)[1] ){
-        cat("error: invalid data input format. Number of values incorrect")
-        return(NULL)
+        stop("error: invalid data input format. Number of values incorrect")
     }
     ## Check if the last field is the correct one
     if(tolower(colnames(Input)[S]) != "scosts"){
-        cat("error: the last variable should be 'scosts'")
-        return(NULL)
+        stop("error: the last variable should be 'scosts'")
     }
+    ## check the column names and give warning
+    data("SampleInput", envir = environment())
+    SampleInput <- get("SampleInput", envir  = environment())
+    valabels = colnames(SampleInput)
+    count.changelabel = 0
+    for(i in 1:S){
+        if(tolower(colnames(Input)[i]) != tolower(valabels)[i]){
+            warning(paste("Input columne '", colnames(Input)[i], "' does not match InterVA standard: '", 
+                    valabels[i], "'", sep = ""),
+                    call. = FALSE, immediate. = TRUE)
+            count.changelabel = count.changelabel + 1
+        }         
+    }
+    if(count.changelabel > 0){
+        warning(paste(count.changelabel, "column names changed in input. \n If the change in undesirable, please change in the input to match standard InterVA4 input format."), call. = FALSE, immediate. = TRUE)
+        colnames(Input) <- valabels
+    }
+    
     ## Change conditional probability labels into values
     probbase[probbase=="I"]<-1
     probbase[probbase=="A+"]<-0.8

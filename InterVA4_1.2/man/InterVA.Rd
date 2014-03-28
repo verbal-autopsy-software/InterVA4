@@ -43,7 +43,9 @@ A logical value indicating whether or not the group code will be included in the
   }
 }
 \details{
-InterVA performs the same tasks as the InterVA4. The output is saved in a .csv file specified by user. The calculation is based on the conditional and prior distribution of 68 CODs. The function also could save the full probability distibution of each individual to file. All information about each individual is saved to a va class object.  
+InterVA performs the same tasks as the InterVA4. The output is saved in a .csv file specified by user. The calculation is based on the conditional and prior distribution of 68 CODs. The function also could save the full probability distibution of each individual to file. All information about each individual is saved to a va class object. 
+
+Be careful if the input file does not match InterVA input format strictly. The function will run normally as long as the number of symptoms are correct. Any inconsistent symptom names will be printed in console as warning. If there's wrong match of symptom from warning, please change in the input to correct orders. 
 }
 \value{
 \item{ID }{identifier from batch (input) file}
@@ -75,11 +77,15 @@ Zehang Li, Tyler McCormick, Sam Clark
 \examples{
 data(SampleInput)
 ## to get easy-to-read version of causes of death
-sample.output<-InterVA(SampleInput, HIV = "h", Malaria = "l", directory = "VA test",
+## 
+## make sure the column orders match interVA4 standard input
+## this can be monitored by checking the warnings of column names
+
+sample.output1<-InterVA(SampleInput, HIV = "h", Malaria = "l", directory = "VA test",
 filename = "VA_result", output = "extended", append = FALSE, replicate = TRUE)
 
 ## to get causes of death with group code for further usage
-sample.output<-InterVA(SampleInput, HIV = "h", Malaria = "l", directory = "VA test",
+sample.output2<-InterVA(SampleInput, HIV = "h", Malaria = "l", directory = "VA test",
 filename = "VA_result_wt_code", output = "classic", append = FALSE, replicate = TRUE, groupcode = TRUE)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
