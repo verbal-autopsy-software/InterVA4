@@ -2,7 +2,7 @@ Package: InterVA4
 Type: Package
 Title: Replicate and analyse InterVA4
 Version: 1.2
-Date: 2013-02-10
+Date: 2013-03-28
 Author: Zehang Li, Tyler McCormick, Sam Clark
 Maintainer: Zehang Li <lizehang@uw.edu>
 Description: The package provides an R version of the InterVA4 software for coding cause of death from verbal autopsies. It also provides simple graphical representation of individual and population level statistics. 

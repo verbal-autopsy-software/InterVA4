@@ -86,7 +86,8 @@ filename = "VA_result", output = "extended", append = FALSE, replicate = TRUE)
 
 ## to get causes of death with group code for further usage
 sample.output2<-InterVA(SampleInput, HIV = "h", Malaria = "l", directory = "VA test",
-filename = "VA_result_wt_code", output = "classic", append = FALSE, replicate = TRUE, groupcode = TRUE)
+filename = "VA_result_wt_code", output = "classic", 
+append = FALSE, replicate = TRUE, groupcode = TRUE)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
