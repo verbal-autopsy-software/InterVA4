@@ -3,7 +3,8 @@
 \title{Provide InterVA4 analysis on the data input.}
 \usage{
 InterVA(Input, HIV, Malaria, directory = NULL, filename = "VA_result", 
-    output = "classic", append = FALSE, groupcode = FALSE, replicate = FALSE)
+    output = "classic", append = FALSE, groupcode = FALSE, 
+    replicate = FALSE, write = TRUE)
 }
 \arguments{
   \item{Input}{A matrix input, or data read from csv files
@@ -47,6 +48,9 @@ InterVA(Input, HIV, Malaria, directory = NULL, filename = "VA_result",
   \item{groupcode}{A logical value indicating whether or
   not the group code will be included in the output
   causes.}
+
+  \item{write}{A logical value indicating whether or
+  not the output (including errors and warnings) will be saved to file.}
 }
 \value{
 \item{ID }{identifier from batch (input) file}

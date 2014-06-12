@@ -128,7 +128,7 @@ Population.summary<-function (va, top = NULL, InterVA = FALSE, noplot = FALSE, t
     ## Add the probabilities together
 	if(!InterVA){
         for(i in 1:length(va)){
-            if(is.null(va[[i]][14])) next
+            if(is.null(va[[i]][14])) {undeter = undeter + 1; next}
             this.dist <- unlist(va[[i]][14])
             cutoff <- this.dist[order(this.dist, decreasing = TRUE)[top]]
             undeter <- undeter + sum(this.dist[which(this.dist < cutoff)])
