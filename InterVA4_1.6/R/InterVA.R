@@ -37,7 +37,15 @@
 #' with small probability are not dropped out of calculation in intermediate
 #' steps, and a possible bug in original InterVA4 implementation is fixed.  If
 #' replicate=T, then the output values will be exactly as they would be from
-#' calling the InterVA4 program.
+#' calling the InterVA4 program. Since version 1.6, two control variables are added
+#' to control the two bugs respectively. Setting this to TRUE will overwrite both to
+#' TRUE.
+#' @param replicate.bug1 This logical indicator controls whether or not the bug
+#' in InterVA4.2 involving the symptom "skin_less" will be replicated or not. It
+#' is suggested to set to FALSE.
+#' @param replicate.bug2 This logical indicator controls whether the causes
+#' with small probability are dropped out of calculation in intermediate
+#' steps or not. It is suggested to set to FALSE.
 #' @param groupcode A logical value indicating whether or not the group code
 #' will be included in the output causes.
 #' @return \item{ID }{identifier from batch (input) file} \item{MALPREV
@@ -61,14 +69,14 @@
 #' ## the warnings of column names
 #' 
 #' sample.output1 <- InterVA(SampleInput, HIV = "h", Malaria = "l", directory = "VA test", 
-#'     filename = "VA_result", output = "extended", append = FALSE, replicate = TRUE)
+#'     filename = "VA_result", output = "extended", append = FALSE, replicate = FALSE)
 #' 
 #' ## to get causes of death with group code for further usage
 #' sample.output2 <- InterVA(SampleInput, HIV = "h", Malaria = "l", directory = "VA test", 
 #'     filename = "VA_result_wt_code", output = "classic", append = FALSE, 
-#'     replicate = TRUE, groupcode = TRUE)
+#'     replicate = FALSE, groupcode = TRUE)
 #' 
-InterVA<-function(Input,HIV,Malaria,directory = NULL, filename = "VA_result", output="classic", append=FALSE, groupcode = FALSE, replicate = FALSE, write = TRUE){
+InterVA<-function(Input,HIV,Malaria,directory = NULL, filename = "VA_result", output="classic", append=FALSE, groupcode = FALSE, replicate = FALSE, replicate.bug1 = FALSE, replicate.bug2 = FALSE, write = TRUE){
     ############################
     ## define mid-step functions
     ############################
@@ -123,7 +131,11 @@ save.va.prob <- function(x, filename, write){
     filename <- paste(filename, ".csv", sep = "") 
     write.table(t(x), file=filename, sep = ",", append = TRUE,row.names = FALSE,col.names = FALSE)    
 }
-
+    ## overwrite replication options if needed
+    if(replicate){
+      replicate.bug1 <- TRUE
+      replicate.bug2 <- TRUE
+    }
     ########################
     ## Read in data files
     ########################
@@ -321,7 +333,7 @@ save.va.prob <- function(x, filename, write){
         ## So if the user wishes to replicate entirely as InterVA
         ## the replicate option should be set to TRUE
         ## effect: whenever skin = 1 --> skin_les = 1
-        if(replicate == TRUE && input.current[84] == 1){
+        if(replicate.bug1 == TRUE && input.current[84] == 1){
         	input.current[85] <- 1
         }
         
@@ -349,7 +361,7 @@ save.va.prob <- function(x, filename, write){
         # Normalize B group 
 		if(sum(prob[4:63]) > 0) prob[4:63] <- prob[4:63]/sum(prob[4:63])
         # delete too small probs
-        if(replicate){prob[prob < 0.000001] <- 0}
+        if(replicate.bug2){prob[prob < 0.000001] <- 0}
         }
               
         names(prob) <- causetext[,2]
