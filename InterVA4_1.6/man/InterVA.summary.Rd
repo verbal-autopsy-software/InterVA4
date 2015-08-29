@@ -10,7 +10,7 @@ InterVA.summary(va)
 \item{va}{The list of va object to summarize.}
 }
 \value{
-\item{dist.cod} The cause-specific mortality fraction (including undetermined category).
+\item{dist.cod}{The cause-specific mortality fraction (including undetermined category).}
 }
 \description{
 The function takes input of a list of va object and calculates the

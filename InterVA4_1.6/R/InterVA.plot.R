@@ -3,9 +3,8 @@
 #' The function takes input of a list of va object and calculates the 
 #' cause-specific mortality fraction.
 #' 
-#' 
 #' @param va The list of va object to summarize.
-#' @return \item{dist.cod} The cause-specific mortality fraction (including undetermined category).
+#' @return \item{dist.cod}{The cause-specific mortality fraction (including undetermined category).}
 #' @author Zehang LI, Tyler McCormick, Sam Clark
 #' @keywords interVA
 #' @seealso \code{\link{Population.summary}}
