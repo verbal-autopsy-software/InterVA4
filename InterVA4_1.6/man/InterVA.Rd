@@ -52,6 +52,9 @@ is suggested to set to FALSE.}
 \item{replicate.bug2}{This logical indicator controls whether the causes
 with small probability are dropped out of calculation in intermediate
 steps or not. It is suggested to set to FALSE.}
+
+\item{write}{A logical value indicating whether or not the output (including
+errors and warnings) will be saved to file.}
 }
 \value{
 \item{ID }{identifier from batch (input) file} \item{MALPREV

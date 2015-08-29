@@ -48,6 +48,8 @@
 #' steps or not. It is suggested to set to FALSE.
 #' @param groupcode A logical value indicating whether or not the group code
 #' will be included in the output causes.
+#' @param write A logical value indicating whether or not the output (including 
+#' errors and warnings) will be saved to file.
 #' @return \item{ID }{identifier from batch (input) file} \item{MALPREV
 #' }{selected malaria prevalence} \item{HIVPREV }{selected HIV prevalence}
 #' \item{PREGSTAT }{most likely pregnancy status} \item{PREGLIK }{likelihood of
