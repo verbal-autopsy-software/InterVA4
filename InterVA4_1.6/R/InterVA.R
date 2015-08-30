@@ -263,8 +263,16 @@ save.va.prob <- function(x, filename, write){
         write.table(t(header),file=paste(filename,".csv",sep=""),row.names=FALSE,col.names=FALSE,sep=",")
 
     }
+    ## add progress indicators now
+    nd <- max(1, round(N / 100))
+    np <- max(1, round(N / 10))
+    
     ## Calculate the InterVA result one by one
     for(i in 1:N){
+        ## print out progress
+        if(i %% nd == 0){cat(".")}
+        if(i %% np == 0){cat(paste(round(i/N * 100), "% completed\n", sep = ""))}
+      
         ## Save the current death ID
         index.current <- as.character(Input[i, 1])
         ## Change input Y/NA into binary value

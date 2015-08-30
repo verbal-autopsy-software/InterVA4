@@ -112,17 +112,17 @@ InterVA.summary <- function(va){
 #' ## it's different from using all top 3 causses, since they may not 
 #' ## all be reported 
 #' population.summary <- Population.summary(sample.output$VA, InterVA = TRUE, 
-#'                                          noplot = TRUE)
+#'    noplot = TRUE)
 #' 
 #' ## Population level summary using pie chart
 #' population.summary <- Population.summary(sample.output$VA, type = "pie", 
-#'                                          min.prob = 0.01, main = "population COD distribution using pie chart", 
-#'                                          clockwise = FALSE, radius = 0.7, cex = 0.7, cex.main = 0.8)
+#'  min.prob = 0.01, main = "population COD distribution using pie chart", 
+#'  clockwise = FALSE, radius = 0.7, cex = 0.7, cex.main = 0.8)
 #' 
 #' ## Population level summary using bar chart
 #' population.summary <- Population.summary(sample.output$VA, type = "bar", 
-#'                                          min.prob = 0.01, main = "population COD distribution using bar chart", 
-#'                                          cex.main = 1)
+#'   min.prob = 0.01, main = "population COD distribution using bar chart", 
+#'   cex.main = 1)
 #' 
 
 Population.summary<-function (va, top = NULL, InterVA = FALSE, noplot = FALSE, type="both",  min.prob = 0.01, ... ) {
