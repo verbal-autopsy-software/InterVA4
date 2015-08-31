@@ -284,15 +284,19 @@ save.va.prob <- function(x, filename, write){
         input.current[1] <- 0
         ## Check if age is specified in the input
         ## If not specified, mark as error and skip the case
-        if(write && sum(input.current[2:8]) < 1 ){
-            cat(paste(index.current," Error in age indicator: Not Specified ","\n"), file="errorlog.txt", append=TRUE)
+        if(sum(input.current[2:8]) < 1 ){
+            if(write){
+              cat(paste(index.current," Error in age indicator: Not Specified ","\n"), file="errorlog.txt", append=TRUE)
+            }
             next
         }
-        
+
         ## Check if sex is specified in the input
         ## If not, mark as error and skip the case
-        if(write && sum(input.current[9:10]) < 1){
-            cat(paste(index.current," Error in sex indicator: Not Specified ","\n"), file="errorlog.txt", append=TRUE)
+        if(sum(input.current[9:10]) < 1){
+            if(write){
+              cat(paste(index.current," Error in sex indicator: Not Specified ","\n"), file="errorlog.txt", append=TRUE)
+            }
             next
         }
         ## Check if there is any symptoms
