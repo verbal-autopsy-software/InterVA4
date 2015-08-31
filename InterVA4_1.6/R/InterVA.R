@@ -253,7 +253,7 @@ save.va.prob <- function(x, filename, write){
     	Sys_Prior[39] <- 0.00001
     }
     ## Prepare the output
-    ID.list <- rep("NA", N)
+    ID.list <- rep(NA, N)
     VAresult <- vector("list",N)
     ## If append is FALSE, build the skeleton of the new file for output
     if(write && append == FALSE) {
@@ -302,8 +302,10 @@ save.va.prob <- function(x, filename, write){
         ## Check if there is any symptoms
         ## 2-22 & 224-246 are not symptoms, but personal profile, or life style
         ## This range is set in the InterVA file
-        if(write && sum(input.current[23:223]) < 1 ){
-            cat(paste(index.current," Error in indicators: No symptoms specified ","\n"), file="errorlog.txt", append=TRUE)
+        if(sum(input.current[23:223]) < 1 ){
+            if(write){
+              cat(paste(index.current," Error in indicators: No symptoms specified ","\n"), file="errorlog.txt", append=TRUE)
+            }
             next
         }
         
@@ -439,7 +441,7 @@ save.va.prob <- function(x, filename, write){
         if(output=="extended") save.va.prob(VAresult[[i]],filename=filename, write)
     }
     setwd(globle.dir)
-    return(list(ID = ID.list, VA = VAresult))
+    return(list(ID = ID.list[which(!is.na(ID.list))], VA = VAresult[which(!is.na(ID.list))]))
 }
 
 
