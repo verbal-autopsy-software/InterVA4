@@ -135,6 +135,7 @@ save.va.prob <- function(x, filename, write){
 }
     ## overwrite replication options if needed
     if(replicate){
+      warning("option 'replicate' is turned on, all bugs in InterVA-4 is replicated\n", immediate. = TRUE)
       replicate.bug1 <- TRUE
       replicate.bug2 <- TRUE
     }
@@ -411,7 +412,7 @@ save.va.prob <- function(x, filename, write){
         prob.temp <- prob_B
         if(max(prob.temp) <= 0.4){
             indet <- "Indet"
-            cause1<-lik1<-cause2<-lik2<-cause3<-lik3<-""
+            cause1<-lik1<-cause2<-lik2<-cause3<-lik3<-" "
         }
         ## Determine the output of InterVA
         if(max(prob.temp) > 0.4){
