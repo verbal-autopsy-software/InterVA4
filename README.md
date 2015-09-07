@@ -7,13 +7,14 @@ This is a working repo for the R package InterVA4. For stable version (currently
 
 If you have any questions regarding this package, or have concerns/find bugs/have new ideas in better implementations to share, please contact Zehang _(Richard)_ Li at lizehang@uw.edu. Thanks!
 
-update 2015-08-30
+update 2015-09-07
 -----------------
 The new version 1.6 has added some new features to functions since version 1.3:
 
-1. Added InterVA.summary() function for CSMF calculation.
-2. Fixed problems with outputting all deaths (including those with key information missing, e.g., missing sex, age, or has no symptoms) to file.
-3. __Added finer control over which of the two bugs in InterVA-4.02 to replicate.__
+1. Added CSMF.interVA4() function for CSMF calculation as suggested in InterVA4 software.
+2. Renamed the function Population.summary() into CSMF() as to make the name consistent with CSMF.interVA4().
+3. Fixed problems with outputting all deaths (including those with key information missing, e.g., missing sex, age, or has no symptoms) to file.
+4. __Added finer control over which of the two bugs in InterVA-4.02 to replicate.__
 
 
 
