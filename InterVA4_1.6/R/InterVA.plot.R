@@ -1,24 +1,24 @@
-#' Summarize population level cause-specific mortality fraction as InterVA4.
+#' Summarize population level cause-specific mortality fraction as InterVA4 suggested.
 #' 
 #' The function takes input of a list of va object and calculates the 
-#' cause-specific mortality fraction.
+#' cause-specific mortality fraction. It only calculates CSMF as aggregation of up to the third largest causes.
 #' 
 #' @param va The list of va object to summarize.
 #' @return \item{dist.cod}{The cause-specific mortality fraction (including undetermined category).}
 #' @author Zehang LI, Tyler McCormick, Sam Clark
 #' @keywords interVA
-#' @seealso \code{\link{Population.summary}}
+#' @seealso \code{\link{CSMF}}
 #' @examples
 #' 
 #' data(SampleInput)
 #' sample.output <- InterVA(SampleInput, HIV = "h", Malaria = "v", directory = "VA test",
 #'        filename = "VA_result", output = "extended", append = FALSE)
 #' ## Get CSMF without plots
-#' csmf<- InterVA.summary(sample.output$VA)
+#' csmf<- CSMF.interVA4(sample.output$VA)
 #' data(SampleInput)
 #' 
 
-InterVA.summary <- function(va){
+CSMF.interVA4 <- function(va){
     data("causetext", envir = environment())
     causetext <- get("causetext", envir  = environment())
     ## Check if there is a valid va object
@@ -68,6 +68,41 @@ InterVA.summary <- function(va){
 
 #' Summarize and plot a population level distribution of va probabilities.
 #' 
+#' This function has been deprecated as of version 1.6. Use 'CSMF' instead.
+#' 
+#' 
+#' @param va The list of va object to summarize.
+#' @param top Integer indicating how many causes from the top need to go into
+#' summary. The rest of the probabilities goes into an extra category
+#' "Undetermined".  When set to NULL, default is all causes to be considered.
+#' This is only used when \code{InterVA} set to "FALSE".
+#' @param InterVA If it is set to "TRUE", only the top 3 causes reported by 
+#' InterVA4 is calculated into CSMF as in InterVA4. The rest of probabilities 
+#' goes into an extra category "Undetermined". Default set to "FALSE".
+#' @param noplot A logical value indicating whether the plot will be shown. If
+#' it is set to "TRUE", only the CSMF will be returned.
+#' @param min.prob The minimum probability that is to be plotted in bar chart,
+#' or to be labeled in pie chart.
+#' @param type An indicator of the type of chart to plot.  "pie" for pie chart;
+#' "bar" for bar chart.
+#' @param ... Arguments to be passed to/from graphic function
+#' \code{\link[graphics]{barplot}}, \code{\link[graphics]{pie}}, and more
+#' graphical paramters (see \code{\link[graphics]{par}}). They will affect the
+#' main title, size and font of labels, and the radius of the pie chart.
+#' @return \item{dist.cod}{The population probability of CODs.}
+#' @author Zehang LI, Tyler McCormick, Sam Clark
+#' @seealso \code{\link{CSMF.interVA4}}
+#' @keywords interVA
+#' 
+#' 
+Population.summary<-function (va, top = NULL, InterVA = FALSE, noplot = FALSE, type="bar",  min.prob = 0.01, ... ) {
+    .Deprecated("CSMF")
+    CSMF(va, top = NULL, InterVA = FALSE, noplot = FALSE, type="bar",  min.prob = 0.01, ... )
+}
+
+
+#' Summarize and plot a population level distribution of va probabilities.
+#' 
 #' The function takes input of a list of va object and produces a summary plot
 #' for the population distribution.
 #' 
@@ -85,14 +120,14 @@ InterVA.summary <- function(va){
 #' @param min.prob The minimum probability that is to be plotted in bar chart,
 #' or to be labeled in pie chart.
 #' @param type An indicator of the type of chart to plot.  "pie" for pie chart;
-#' "bar" for bar chart and "both" for both.
+#' "bar" for bar chart.
 #' @param ... Arguments to be passed to/from graphic function
 #' \code{\link[graphics]{barplot}}, \code{\link[graphics]{pie}}, and more
 #' graphical paramters (see \code{\link[graphics]{par}}). They will affect the
 #' main title, size and font of labels, and the radius of the pie chart.
 #' @return \item{dist.cod}{The population probability of CODs.}
 #' @author Zehang LI, Tyler McCormick, Sam Clark
-#' @seealso \code{\link{InterVA.summary}}
+#' @seealso \code{\link{CSMF.interVA4}}
 #' @keywords interVA
 #' @examples
 #' 
@@ -101,31 +136,30 @@ InterVA.summary <- function(va){
 #'                          filename = "VA_result", output = "extended", append = FALSE)
 #' 
 #' ## Get CSMF without plots
-#' population.summary <- Population.summary(sample.output$VA, noplot = TRUE)
+#' population.summary <- CSMF(sample.output$VA, noplot = TRUE)
 #' 
 #' 
 #' ## Get CSMF by considering only top 3 causes for each death.
-#' population.summary <- Population.summary(sample.output$VA, top = 3, noplot = TRUE)
+#' population.summary <- CSMF(sample.output$VA, top = 3, noplot = TRUE)
 #' 
 #' ## Get CSMF by considering only top 3 causes reported by InterVA.  
-#' ## This is equivalent to using InterVA.summary() command Note that
+#' ## This is equivalent to using CSMF.interVA4() command Note that
 #' ## it's different from using all top 3 causses, since they may not 
 #' ## all be reported 
-#' population.summary <- Population.summary(sample.output$VA, InterVA = TRUE, 
+#' CSMF.summary <- CSMF(sample.output$VA, InterVA = TRUE, 
 #'    noplot = TRUE)
 #' 
 #' ## Population level summary using pie chart
-#' population.summary <- Population.summary(sample.output$VA, type = "pie", 
+#' CSMF.summary2 <- CSMF(sample.output$VA, type = "pie", 
 #'  min.prob = 0.01, main = "population COD distribution using pie chart", 
 #'  clockwise = FALSE, radius = 0.7, cex = 0.7, cex.main = 0.8)
 #' 
 #' ## Population level summary using bar chart
-#' population.summary <- Population.summary(sample.output$VA, type = "bar", 
+#' CSMF.summary3 <- CSMF(sample.output$VA, type = "bar", 
 #'   min.prob = 0.01, main = "population COD distribution using bar chart", 
 #'   cex.main = 1)
 #' 
-
-Population.summary<-function (va, top = NULL, InterVA = FALSE, noplot = FALSE, type="both",  min.prob = 0.01, ... ) {
+CSMF <-function (va, top = NULL, InterVA = FALSE, noplot = FALSE, type="bar",  min.prob = 0.01, ... ) {
 	# data(causetext)
     data("causetext", envir = environment())
     causetext <- get("causetext", envir  = environment())
@@ -168,7 +202,7 @@ Population.summary<-function (va, top = NULL, InterVA = FALSE, noplot = FALSE, t
             names(dist.cod)<-causetext[4:63,2]
         }      
     }else{
-        dist.cod <- InterVA.summary(va)   
+        dist.cod <- CSMF.interVA4(va)   
     }
 
 
@@ -181,8 +215,7 @@ Population.summary<-function (va, top = NULL, InterVA = FALSE, noplot = FALSE, t
     		return(dist.cod)
     }
     ## Make pie plot upon request
-    if( type == "pie" || type == "both"){
-        dev.new()
+    if( type == "pie" ){
         dist.cod.sort <- sort(dist.cod, decreasing=TRUE)
         pie.color <- grey.colors(length(dist.cod.sort[dist.cod.sort >= min.prob]))
         pie.color.left <- rep(pie.color[length(pie.color)], length(dist.cod.sort[dist.cod.sort < min.prob]))
@@ -191,8 +224,7 @@ Population.summary<-function (va, top = NULL, InterVA = FALSE, noplot = FALSE, t
         
     }
     ## Make bar plot upon request
-    if( type == "bar"|| type == "both"){
-        dev.new()
+    if( type == "bar"){
         dist.cod.min <- dist.cod[dist.cod > min.prob ]
         dist.cod.min <- sort(dist.cod.min, decreasing = FALSE)
         par(las = 2)
@@ -221,12 +253,12 @@ Population.summary<-function (va, top = NULL, InterVA = FALSE, noplot = FALSE, t
 #' @param min.prob The minimum probability that is to be plotted in bar chart,
 #' or to be labeled in pie chart.
 #' @param type An indicator of the type of chart to plot.  "pie" for pie chart;
-#' "bar" for bar chart and "both" for both.
+#' "bar" for bar chart.
 #' @param ... Arguments to be passed to/from graphic function
 #' \code{\link[graphics]{barplot}}, \code{\link[graphics]{pie}}, and more
 #' graphical paramters (see \code{\link[graphics]{par}}). They will affect the
 #' main title, size and font of labels, and the radius of the pie chart.
-#' @seealso \code{\link{Population.summary}}
+#' @seealso \code{\link{CSMF}}
 #' @keywords InterVA
 #' @examples
 #' 
@@ -244,7 +276,7 @@ Population.summary<-function (va, top = NULL, InterVA = FALSE, noplot = FALSE, t
 #' InterVA.plot(sample.output$VA[[7]], type = "bar", min.prob = 0.01, 
 #'     main = "2nd sample VA analysis using bar chart", cex.main = 0.8)
 #' 
-InterVA.plot <- function(va, type="both", min.prob = 0.01, ... ){
+InterVA.plot <- function(va, type="bar", min.prob = 0.01, ... ){
     # data(causetext)
     data("causetext", envir = environment())
     causetext <- get("causetext", envir  = environment())
@@ -264,8 +296,7 @@ InterVA.plot <- function(va, type="both", min.prob = 0.01, ... ){
     }
     names(dist.cod)<-causetext[4:63,2]
     ## Make pie plot upon request    
-    if( type == "pie" || type == "both"){
-        dev.new()
+    if( type == "pie" ){
         dist.cod.sort <- sort(dist.cod, decreasing=TRUE)
         pie.color <- grey.colors(length(dist.cod.sort[dist.cod.sort >= min.prob]))
         pie.color.left <- rep(pie.color[length(pie.color)], length(dist.cod.sort[dist.cod.sort < min.prob]))
@@ -274,8 +305,7 @@ InterVA.plot <- function(va, type="both", min.prob = 0.01, ... ){
         
     }
     ## Make bar plot upon request
-    if( type == "bar"|| type == "both"){
-        dev.new()
+    if( type == "bar"){
         dist.cod.min <- dist.cod[dist.cod > min.prob ]
         dist.cod.min <- sort(dist.cod.min, decreasing = FALSE)
         par(las = 2)

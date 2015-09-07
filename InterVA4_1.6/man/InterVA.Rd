@@ -46,7 +46,7 @@ to control the two bugs respectively. Setting this to TRUE will overwrite both t
 TRUE.}
 
 \item{replicate.bug1}{This logical indicator controls whether or not the bug
-in InterVA4.2 involving the symptom "skin_less" will be replicated or not. It
+in InterVA4.2 involving the symptom "skin_les" will be replicated or not. It
 is suggested to set to FALSE.}
 
 \item{replicate.bug2}{This logical indicator controls whether the causes

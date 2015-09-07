@@ -4,13 +4,13 @@
 \alias{InterVA.plot}
 \title{Plot a individual level distribution of va probabilities.}
 \usage{
-InterVA.plot(va, type = "both", min.prob = 0.01, ...)
+InterVA.plot(va, type = "bar", min.prob = 0.01, ...)
 }
 \arguments{
 \item{va}{A va object}
 
 \item{type}{An indicator of the type of chart to plot.  "pie" for pie chart;
-"bar" for bar chart and "both" for both.}
+"bar" for bar chart.}
 
 \item{min.prob}{The minimum probability that is to be plotted in bar chart,
 or to be labeled in pie chart.}
@@ -40,7 +40,7 @@ InterVA.plot(sample.output$VA[[7]], type = "bar", min.prob = 0.01,
     main = "2nd sample VA analysis using bar chart", cex.main = 0.8)
 }
 \seealso{
-\code{\link{Population.summary}}
+\code{\link{CSMF}}
 }
 \keyword{InterVA}
 

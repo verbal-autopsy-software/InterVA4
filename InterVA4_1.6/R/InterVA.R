@@ -41,7 +41,7 @@
 #' to control the two bugs respectively. Setting this to TRUE will overwrite both to
 #' TRUE.
 #' @param replicate.bug1 This logical indicator controls whether or not the bug
-#' in InterVA4.2 involving the symptom "skin_less" will be replicated or not. It
+#' in InterVA4.2 involving the symptom "skin_les" will be replicated or not. It
 #' is suggested to set to FALSE.
 #' @param replicate.bug2 This logical indicator controls whether the causes
 #' with small probability are dropped out of calculation in intermediate
@@ -238,6 +238,11 @@ save.va.prob <- function(x, filename, write){
     D <- length(Sys_Prior)
     ## Modify the prior based on HIV and Malaria prevalence
     ## 19 = B_HIVAIDS; 21 = B_MALAR; 39 = B_SICKLE
+    HIV <- tolower(HIV)
+    Malaria <- tolower(Malaria)
+    if(!(HIV %in% c("h", "l", "v"))  || !(Malaria %in% c("h", "l", "v"))){
+      stop("error: the HIV and Malaria indicator should be one of the three: 'h', 'l', and 'v'")
+    }
     if(HIV == "h") Sys_Prior[19] <- 0.05
     if(HIV == "l") Sys_Prior[19] <- 0.005
     if(HIV == "v") Sys_Prior[19] <- 0.00001
