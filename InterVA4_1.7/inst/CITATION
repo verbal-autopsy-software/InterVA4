@@ -1,0 +1,14 @@
+citHeader("To cite package 'InterVA4' in publications use:")
+     
+citEntry(
+   entry   = "TechReport",
+   title   = "InterVA4: An {R} package to analyze verbal autopsy data",
+   author  = personList( as.person( "Zehang Richard Li"),
+    			 as.person("Tyler H. McCormick"), 
+      			 as.person("Samuel J. Clark")),
+   year    = "2014", 
+   institution = "Working paper no. 146, Center for Statistics and the Social Sciences, University of Washington",
+   textVersion = paste( "Zehang R. Li, Tyler H. McCormick and Samuel J. Clark (2014)",
+                        "InterVA4: An R package to analyze verbal autopsy data.",
+                        "Working paper no. 146, Center for Statistics and the Social Sciences, University of Washington")
+)
