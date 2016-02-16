@@ -72,7 +72,7 @@ CSMF.interVA4 <- function(va){
 #' 
 #' 
 #' @param va The list of va object to summarize.
-#' @param top Integer indicating how many causes from the top need to go into
+#' @param top.aggregate Integer indicating how many causes from the top need to go into
 #' summary. The rest of the probabilities goes into an extra category
 #' "Undetermined".  When set to NULL, default is all causes to be considered.
 #' This is only used when \code{InterVA} set to "FALSE".
@@ -95,9 +95,9 @@ CSMF.interVA4 <- function(va){
 #' @keywords interVA
 #' 
 #' 
-Population.summary<-function (va, top = NULL, InterVA = FALSE, noplot = FALSE, type="bar",  min.prob = 0.01, ... ) {
+Population.summary<-function (va, top.aggregate = NULL, InterVA = FALSE, noplot = FALSE, type="bar",  min.prob = 0.01, ... ) {
     .Deprecated("CSMF")
-    CSMF(va, top = NULL, InterVA = FALSE, noplot = FALSE, type="bar",  min.prob = 0.01, ... )
+    CSMF(va, top.aggregate = NULL, InterVA = FALSE, noplot = FALSE, type="bar",  min.prob = 0.01, ... )
 }
 
 
@@ -108,7 +108,7 @@ Population.summary<-function (va, top = NULL, InterVA = FALSE, noplot = FALSE, t
 #' 
 #' 
 #' @param va The list of va object to summarize.
-#' @param top Integer indicating how many causes from the top need to go into
+#' @param top.aggregate Integer indicating how many causes from the top need to go into
 #' summary. The rest of the probabilities goes into an extra category
 #' "Undetermined".  When set to NULL, default is all causes to be considered.
 #' This is only used when \code{InterVA} set to "FALSE".
@@ -117,6 +117,7 @@ Population.summary<-function (va, top = NULL, InterVA = FALSE, noplot = FALSE, t
 #' goes into an extra category "Undetermined". Default set to "FALSE".
 #' @param noplot A logical value indicating whether the plot will be shown. If
 #' it is set to "TRUE", only the CSMF will be returned.
+#' @param top.plot the maximum number of causes to plot in bar plot
 #' @param min.prob The minimum probability that is to be plotted in bar chart,
 #' or to be labeled in pie chart.
 #' @param type An indicator of the type of chart to plot.  "pie" for pie chart;
@@ -140,26 +141,30 @@ Population.summary<-function (va, top = NULL, InterVA = FALSE, noplot = FALSE, t
 #' 
 #' 
 #' ## Get CSMF by considering only top 3 causes for each death.
-#' population.summary <- CSMF(sample.output$VA, top = 3, noplot = TRUE)
+#' population.summary <- CSMF(sample.output$VA, top.aggregate = 3, noplot = TRUE)
 #' 
 #' ## Get CSMF by considering only top 3 causes reported by InterVA.  
 #' ## This is equivalent to using CSMF.interVA4() command Note that
 #' ## it's different from using all top 3 causses, since they may not 
 #' ## all be reported 
-#' CSMF.summary <- CSMF(sample.output$VA, InterVA = TRUE, 
+#' CSMF.summary <- CSMF(sample.output, InterVA = TRUE, 
 #'    noplot = TRUE)
 #' 
 #' ## Population level summary using pie chart
-#' CSMF.summary2 <- CSMF(sample.output$VA, type = "pie", 
+#' CSMF.summary2 <- CSMF(sample.output, type = "pie", 
 #'  min.prob = 0.01, main = "population COD distribution using pie chart", 
 #'  clockwise = FALSE, radius = 0.7, cex = 0.7, cex.main = 0.8)
 #' 
 #' ## Population level summary using bar chart
-#' CSMF.summary3 <- CSMF(sample.output$VA, type = "bar", 
+#' CSMF.summary3 <- CSMF(sample.output, type = "bar", 
 #'   min.prob = 0.01, main = "population COD distribution using bar chart", 
 #'   cex.main = 1)
+## Population level summary specified by number of top causes
+#' CSMF.summary4 <- CSMF(sample.output, type = "bar", 
+#'   top.plot = 5, main = "Top 5 population COD distribution", 
+#'   cex.main = 1)
 #' 
-CSMF <-function (va, top = NULL, InterVA = FALSE, noplot = FALSE, type="bar",  min.prob = 0.01, ... ) {
+CSMF <-function (va, top.aggregate = NULL, InterVA = FALSE, noplot = FALSE, type="bar",  top.plot = NULL, min.prob = 0.01, ... ) {
 	# data(causetext)
     data("causetext", envir = environment())
     causetext <- get("causetext", envir  = environment())
@@ -182,7 +187,7 @@ CSMF <-function (va, top = NULL, InterVA = FALSE, noplot = FALSE, type="bar",  m
         }
     } 
     ## determine how many causes from top need to be summarized
-    if(is.null(top)) top <- 60
+    if(is.null(top.aggregate)) top.aggregate <- 60
     undeter <- 0
 
     if(is.null(dist)){cat("No va probability found in input"); return}   
@@ -191,7 +196,7 @@ CSMF <-function (va, top = NULL, InterVA = FALSE, noplot = FALSE, type="bar",  m
         for(i in 1:length(va)){
             if(is.null(va[[i]][14])) {undeter = undeter + 1; next}
             this.dist <- unlist(va[[i]][14])
-            cutoff <- this.dist[order(this.dist, decreasing = TRUE)[top]]
+            cutoff <- this.dist[order(this.dist, decreasing = TRUE)[top.aggregate]]
             undeter <- undeter + sum(this.dist[which(this.dist < cutoff)])
             
             this.dist[which(this.dist < cutoff)] <- 0
@@ -219,6 +224,14 @@ CSMF <-function (va, top = NULL, InterVA = FALSE, noplot = FALSE, type="bar",  m
     if(noplot){
     		return(dist.cod)
     }
+
+    if(!is.null(top.plot)){
+        if(top.plot < length(dist.cod)){
+            thre <- sort(dist.cod, decreasing=TRUE)[top.plot]
+            min.prob <- max(min.prob, thre)
+        }
+    }
+
     ## Make pie plot upon request
     if( type == "pie" ){
         dist.cod.sort <- sort(dist.cod, decreasing=TRUE)
@@ -311,7 +324,7 @@ InterVA.plot <- function(va, type="bar", min.prob = 0.01, ... ){
     }
     ## Make bar plot upon request
     if( type == "bar"){
-        dist.cod.min <- dist.cod[dist.cod > min.prob ]
+        dist.cod.min <- dist.cod[dist.cod >= min.prob ]
         dist.cod.min <- sort(dist.cod.min, decreasing = FALSE)
         par(las = 2)
         par(mar = c(5,15,4,2))

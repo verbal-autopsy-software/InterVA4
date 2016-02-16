@@ -4,13 +4,13 @@
 \alias{Population.summary}
 \title{Summarize and plot a population level distribution of va probabilities.}
 \usage{
-Population.summary(va, top = NULL, InterVA = FALSE, noplot = FALSE,
-  type = "bar", min.prob = 0.01, ...)
+Population.summary(va, top.aggregate = NULL, InterVA = FALSE,
+  noplot = FALSE, type = "bar", min.prob = 0.01, ...)
 }
 \arguments{
 \item{va}{The list of va object to summarize.}
 
-\item{top}{Integer indicating how many causes from the top need to go into
+\item{top.aggregate}{Integer indicating how many causes from the top need to go into
 summary. The rest of the probabilities goes into an extra category
 "Undetermined".  When set to NULL, default is all causes to be considered.
 This is only used when \code{InterVA} set to "FALSE".}

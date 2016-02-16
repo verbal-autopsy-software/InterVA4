@@ -4,13 +4,13 @@
 \alias{CSMF}
 \title{Summarize and plot a population level distribution of va probabilities.}
 \usage{
-CSMF(va, top = NULL, InterVA = FALSE, noplot = FALSE, type = "bar",
-  min.prob = 0.01, ...)
+CSMF(va, top.aggregate = NULL, InterVA = FALSE, noplot = FALSE,
+  type = "bar", top.plot = NULL, min.prob = 0.01, ...)
 }
 \arguments{
 \item{va}{The list of va object to summarize.}
 
-\item{top}{Integer indicating how many causes from the top need to go into
+\item{top.aggregate}{Integer indicating how many causes from the top need to go into
 summary. The rest of the probabilities goes into an extra category
 "Undetermined".  When set to NULL, default is all causes to be considered.
 This is only used when \code{InterVA} set to "FALSE".}
@@ -24,6 +24,8 @@ it is set to "TRUE", only the CSMF will be returned.}
 
 \item{type}{An indicator of the type of chart to plot.  "pie" for pie chart;
 "bar" for bar chart.}
+
+\item{top.plot}{the maximum number of causes to plot in bar plot}
 
 \item{min.prob}{The minimum probability that is to be plotted in bar chart,
 or to be labeled in pie chart.}
@@ -50,23 +52,26 @@ population.summary <- CSMF(sample.output$VA, noplot = TRUE)
 
 
 ## Get CSMF by considering only top 3 causes for each death.
-population.summary <- CSMF(sample.output$VA, top = 3, noplot = TRUE)
+population.summary <- CSMF(sample.output$VA, top.aggregate = 3, noplot = TRUE)
 
 ## Get CSMF by considering only top 3 causes reported by InterVA.
 ## This is equivalent to using CSMF.interVA4() command Note that
 ## it's different from using all top 3 causses, since they may not
 ## all be reported
-CSMF.summary <- CSMF(sample.output$VA, InterVA = TRUE,
+CSMF.summary <- CSMF(sample.output, InterVA = TRUE,
    noplot = TRUE)
 
 ## Population level summary using pie chart
-CSMF.summary2 <- CSMF(sample.output$VA, type = "pie",
+CSMF.summary2 <- CSMF(sample.output, type = "pie",
  min.prob = 0.01, main = "population COD distribution using pie chart",
  clockwise = FALSE, radius = 0.7, cex = 0.7, cex.main = 0.8)
 
 ## Population level summary using bar chart
-CSMF.summary3 <- CSMF(sample.output$VA, type = "bar",
+CSMF.summary3 <- CSMF(sample.output, type = "bar",
   min.prob = 0.01, main = "population COD distribution using bar chart",
+  cex.main = 1)
+CSMF.summary4 <- CSMF(sample.output, type = "bar",
+  top.plot = 5, main = "Top 5 population COD distribution",
   cex.main = 1)
 }
 \author{
