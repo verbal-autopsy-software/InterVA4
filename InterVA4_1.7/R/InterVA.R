@@ -50,6 +50,7 @@
 #' will be included in the output causes.
 #' @param write A logical value indicating whether or not the output (including 
 #' errors and warnings) will be saved to file.
+#' @param ... not used
 #' @return \item{ID }{identifier from batch (input) file} \item{MALPREV
 #' }{selected malaria prevalence} \item{HIVPREV }{selected HIV prevalence}
 #' \item{PREGSTAT }{most likely pregnancy status} \item{PREGLIK }{likelihood of
@@ -78,12 +79,12 @@
 #'     filename = "VA_result_wt_code", output = "classic", append = FALSE, 
 #'     replicate = FALSE, groupcode = TRUE)
 #' 
-InterVA<-function(Input,HIV,Malaria,directory = NULL, filename = "VA_result", output="classic", append=FALSE, groupcode = FALSE, replicate = FALSE, replicate.bug1 = FALSE, replicate.bug2 = FALSE, write = TRUE){
+InterVA<-function(Input, HIV, Malaria, directory = NULL, filename = "VA_result", output="classic", append=FALSE, groupcode = FALSE, replicate = FALSE, replicate.bug1 = FALSE, replicate.bug2 = FALSE, write = TRUE, ...){
     ############################
     ## define mid-step functions
     ############################
     
-    va <- function(ID , MALPREV, HIVPREV , PREGSTAT, PREGLIK , PRMAT , INDET , CAUSE1, LIK1, CAUSE2 , LIK2 , CAUSE3 , LIK3 , wholeprob,    ...){
+    va <- function(ID , MALPREV, HIVPREV , PREGSTAT, PREGLIK , PRMAT , INDET , CAUSE1, LIK1, CAUSE2 , LIK2 , CAUSE3 , LIK3 , wholeprob, ...){
     ## ID
     ID <- ID
     ## The prevalence of Malaria

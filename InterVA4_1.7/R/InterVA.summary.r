@@ -25,9 +25,17 @@
 #' summary(sample.output1, top = 10)
 #' summary(sample.output1, id = "100532")
 summary.interVA <- function(object, top = 5, id = NULL, InterVA = TRUE, ...){
-    data("causetext", envir = environment())
-    causetext <- get("causetext", envir  = environment())
-
+	if(is.null(object$dev)){
+		data("causetext", envir = environment())
+    	causetext <- get("causetext", envir  = environment())
+    	causenames <- causetext[4:63,2]
+    	causeindex <- 4:63
+	}else{
+		InterVA <- FALSE
+		causenames <- names(object$VA[[1]]$wholeprob)
+		causeindex <- 1:length(causenames)
+	}
+    
 	out <- NULL
 	va <- object$VA
 	out$top <- top
@@ -58,12 +66,12 @@ summary.interVA <- function(object, top = 5, id = NULL, InterVA = TRUE, ...){
         }  
             ## Normalize the probability for CODs
         if(undeter > 0){
-            dist.cod <- c(dist[4:63], undeter)
+            dist.cod <- c(dist[causeindex], undeter)
             dist.cod <- dist.cod/sum(dist.cod)
-            names(dist.cod)<-c(causetext[4:63,2], "Undetermined")
+            names(dist.cod)<-c(causenames, "Undetermined")
         }else{
-            csmf <- dist[4:63]/sum(dist[4:63])
-            names(csmf)<-causetext[4:63,2]
+            csmf <- dist[causeindex]/sum(dist[causeindex])
+            names(csmf)<-causenames
         }      
     }else{
         csmf <- CSMF.interVA4(va)   
@@ -81,7 +89,7 @@ summary.interVA <- function(object, top = 5, id = NULL, InterVA = TRUE, ...){
 			out$undet <- FALSE
 			probs.tmp <- object$VA[[index]][14][[1]]
 			out$preg <- probs.tmp[1:3]
-			out$probs <- probs.tmp[4:63]
+			out$probs <- probs.tmp[causeindex]
 			topcauses <- sort(out$probs, decreasing = TRUE)[1:top]
 			out$indiv.top <- data.frame(Cause = names(topcauses))
 			out$indiv.top$Likelihood <- topcauses

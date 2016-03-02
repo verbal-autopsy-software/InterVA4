@@ -7,7 +7,7 @@
 InterVA(Input, HIV, Malaria, directory = NULL, filename = "VA_result",
   output = "classic", append = FALSE, groupcode = FALSE,
   replicate = FALSE, replicate.bug1 = FALSE, replicate.bug2 = FALSE,
-  write = TRUE)
+  write = TRUE, ...)
 }
 \arguments{
 \item{Input}{A matrix input, or data read from csv files in the same format
@@ -55,6 +55,8 @@ steps or not. It is suggested to set to FALSE.}
 
 \item{write}{A logical value indicating whether or not the output (including
 errors and warnings) will be saved to file.}
+
+\item{...}{not used}
 }
 \value{
 \item{ID }{identifier from batch (input) file} \item{MALPREV

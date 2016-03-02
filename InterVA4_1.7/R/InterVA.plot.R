@@ -164,7 +164,7 @@ Population.summary<-function (va, top.aggregate = NULL, InterVA = FALSE, noplot 
 #'   top.plot = 5, main = "Top 5 population COD distribution", 
 #'   cex.main = 1)
 #' 
-CSMF <-function (va, top.aggregate = NULL, InterVA = FALSE, noplot = FALSE, type="bar",  top.plot = NULL, min.prob = 0.01, ... ) {
+CSMF <-function (va, top.aggregate = NULL, InterVA = FALSE, noplot = FALSE, type="bar",  top.plot = 10, min.prob = 0, ... ) {
 	# data(causetext)
     data("causetext", envir = environment())
     causetext <- get("causetext", envir  = environment())
