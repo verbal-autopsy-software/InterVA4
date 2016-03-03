@@ -28,7 +28,15 @@ CSMF.interVA4 <- function(va){
         }
     }
    
-    
+    # fix for removing the first 3 preg related death in standard input
+    if(causenames[1] == "Not pregnant or recently delivered" &&
+        causenames[2] == "Pregnancy ended within 6 weeks of death" &&
+        causenames[3] == "Pregnant at death"){
+            causeindex <- causeindex[-c(1:3)]
+            causenames <- causenames[-c(1:3)]    
+    }
+
+
     ## Check if there is a valid va object
     if(length(va) < 1){
         cat("No va object found")
@@ -187,6 +195,14 @@ CSMF <-function (va, top.aggregate = NULL, InterVA = FALSE, noplot = FALSE, type
             break
         }
     }
+    
+    # fix for removing the first 3 preg related death in standard input
+    if(causenames[1] == "Not pregnant or recently delivered" &&
+        causenames[2] == "Pregnancy ended within 6 weeks of death" &&
+        causenames[3] == "Pregnant at death"){
+            causeindex <- causeindex[-c(1:3)]
+            causenames <- causenames[-c(1:3)]    
+    }
 
     if(length(va) < 1){
 		cat("No va object found")
@@ -317,6 +333,14 @@ InterVA.plot <- function(va, type="bar", min.prob = 0.01, ... ){
     }else{
         cat("Cause of death undetermined for this case\n")
         return
+    }
+
+    # fix for removing the first 3 preg related death in standard input
+    if(causenames[1] == "Not pregnant or recently delivered" &&
+        causenames[2] == "Pregnancy ended within 6 weeks of death" &&
+        causenames[3] == "Pregnant at death"){
+            causeindex <- causeindex[-c(1:3)]
+            causenames <- causenames[-c(1:3)]    
     }
 
 
