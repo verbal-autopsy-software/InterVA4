@@ -19,8 +19,16 @@
 #' 
 
 CSMF.interVA4 <- function(va){
-    data("causetext", envir = environment())
-    causetext <- get("causetext", envir  = environment())
+   # for future compatibility with non-standard input
+    for(i in 1:length(va)){
+        if(!is.null(va[[i]]$wholeprob)){
+            causenames <- names(va[[i]]$wholeprob)
+            causeindex <- 1:length(causenames)
+            break
+        }
+    }
+   
+    
     ## Check if there is a valid va object
     if(length(va) < 1){
         cat("No va object found")
@@ -55,12 +63,12 @@ CSMF.interVA4 <- function(va){
     } 
     ## Normalize the probability for CODs
     if(undeter > 0){
-        dist.cod <- c(dist[4:63], undeter)
+        dist.cod <- c(dist[causeindex], undeter)
         dist.cod <- dist.cod/sum(dist.cod)
-        names(dist.cod)<-c(causetext[4:63,2], "Undetermined")
+        names(dist.cod)<-c(causenames, "Undetermined")
     }else{
-        dist.cod <- dist[4:63]/sum(dist[4:63])
-        names(dist.cod)<-causetext[4:63,2]
+        dist.cod <- dist[causeindex]/sum(dist[causeindex])
+        names(dist.cod)<-causenames
     } 
 
     return(dist.cod)  
@@ -165,13 +173,19 @@ Population.summary<-function (va, top.aggregate = NULL, InterVA = FALSE, noplot 
 #'   cex.main = 1)
 #' 
 CSMF <-function (va, top.aggregate = NULL, InterVA = FALSE, noplot = FALSE, type="bar",  top.plot = 10, min.prob = 0, ... ) {
-	# data(causetext)
-    data("causetext", envir = environment())
-    causetext <- get("causetext", envir  = environment())
-    
+	
     ## Check if there is a valid va object
     if(class(va) == "interVA"){
         va <- va$VA
+    }
+
+    # for future compatibility with non-standard input
+    for(i in 1:length(va)){
+        if(!is.null(va[[i]]$wholeprob)){
+            causenames <- names(va[[i]]$wholeprob)
+            causeindex <- 1:length(causenames)
+            break
+        }
     }
 
     if(length(va) < 1){
@@ -187,7 +201,7 @@ CSMF <-function (va, top.aggregate = NULL, InterVA = FALSE, noplot = FALSE, type
         }
     } 
     ## determine how many causes from top need to be summarized
-    if(is.null(top.aggregate)) top.aggregate <- 60
+    if(is.null(top.aggregate)) top.aggregate <- length(causeindex)
     undeter <- 0
 
     if(is.null(dist)){cat("No va probability found in input"); return}   
@@ -204,12 +218,12 @@ CSMF <-function (va, top.aggregate = NULL, InterVA = FALSE, noplot = FALSE, type
         }  
             ## Normalize the probability for CODs
         if(undeter > 0){
-            dist.cod <- c(dist[4:63], undeter)
+            dist.cod <- c(dist[causeindex], undeter)
             dist.cod <- dist.cod/sum(dist.cod)
-            names(dist.cod)<-c(causetext[4:63,2], "Undetermined")
+            names(dist.cod)<-c(causenames, "Undetermined")
         }else{
-            dist.cod <- dist[4:63]/sum(dist[4:63])
-            names(dist.cod)<-causetext[4:63,2]
+            dist.cod <- dist[causeindex]/sum(dist[causeindex])
+            names(dist.cod)<-causenames
         }      
     }else{
         dist.cod <- CSMF.interVA4(va)   
@@ -295,10 +309,17 @@ CSMF <-function (va, top.aggregate = NULL, InterVA = FALSE, noplot = FALSE, type
 #'     main = "2nd sample VA analysis using bar chart", cex.main = 0.8)
 #' 
 InterVA.plot <- function(va, type="bar", min.prob = 0.01, ... ){
-    # data(causetext)
-    data("causetext", envir = environment())
-    causetext <- get("causetext", envir  = environment())
     
+    # for future compatibility with non-standard input
+    if(!is.null(va$wholeprob)){
+        causenames <- names(va$wholeprob)
+        causeindex <- 1:length(causenames)
+    }else{
+        cat("Cause of death undetermined for this case\n")
+        return
+    }
+
+
     ## Check if there is a valid va object
 	if(length(va) < 1){
 		cat("No va object found")
@@ -306,13 +327,13 @@ InterVA.plot <- function(va, type="bar", min.prob = 0.01, ... ){
 	}
     ## Find the probability distribution
 	dist <- unlist(va[14])
-    dist.cod <- dist[4:63]/sum(dist[4:63])
+    dist.cod <- dist[causeindex]/sum(dist[causeindex])
     ## Check if there is CODs above the minimum cut-off for prob
     if(max(dist.cod) < min.prob){
         cat("No COD larger than the minimum probability cut off line")
         return
     }
-    names(dist.cod)<-causetext[4:63,2]
+    names(dist.cod)<-causenames
     ## Make pie plot upon request    
     if( type == "pie" ){
         dist.cod.sort <- sort(dist.cod, decreasing=TRUE)
