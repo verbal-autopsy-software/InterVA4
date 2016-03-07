@@ -4,7 +4,7 @@
 \alias{CSMF}
 \title{Summarize and plot a population level distribution of va probabilities.}
 \usage{
-CSMF(va, top.aggregate = NULL, InterVA = FALSE, noplot = FALSE,
+CSMF(va, top.aggregate = NULL, InterVA.rule = FALSE, noplot = FALSE,
   type = "bar", top.plot = 10, min.prob = 0, ...)
 }
 \arguments{
@@ -13,9 +13,9 @@ CSMF(va, top.aggregate = NULL, InterVA = FALSE, noplot = FALSE,
 \item{top.aggregate}{Integer indicating how many causes from the top need to go into
 summary. The rest of the probabilities goes into an extra category
 "Undetermined".  When set to NULL, default is all causes to be considered.
-This is only used when \code{InterVA} set to "FALSE".}
+This is only used when \code{InterVA.rule} set to "FALSE".}
 
-\item{InterVA}{If it is set to "TRUE", only the top 3 causes reported by
+\item{InterVA.rule}{If it is set to "TRUE", only the top 3 causes reported by
 InterVA4 is calculated into CSMF as in InterVA4. The rest of probabilities
 goes into an extra category "Undetermined". Default set to "FALSE".}
 
@@ -58,7 +58,7 @@ population.summary <- CSMF(sample.output$VA, top.aggregate = 3, noplot = TRUE)
 ## This is equivalent to using CSMF.interVA4() command Note that
 ## it's different from using all top 3 causses, since they may not
 ## all be reported
-CSMF.summary <- CSMF(sample.output, InterVA = TRUE,
+CSMF.summary <- CSMF(sample.output, InterVA.rule = TRUE,
    noplot = TRUE)
 
 ## Population level summary using pie chart

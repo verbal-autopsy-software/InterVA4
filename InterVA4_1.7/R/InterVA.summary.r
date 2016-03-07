@@ -5,7 +5,7 @@
 #' @param object fitted object from \code{InterVA()}
 #' @param top number of top CSMF to show
 #' @param id the ID of a specific death to show
-#' @param InterVA If it is set to "TRUE", only the top 3 causes reported by 
+#' @param InterVA.rule If it is set to "TRUE", only the top 3 causes reported by 
 #' InterVA4 is calculated into CSMF as in InterVA4. The rest of probabilities 
 #' goes into an extra category "Undetermined". Default set to "TRUE".
 #' @param ... not used
@@ -24,7 +24,7 @@
 #' summary(sample.output1)
 #' summary(sample.output1, top = 10)
 #' summary(sample.output1, id = "100532")
-summary.interVA <- function(object, top = 5, id = NULL, InterVA = TRUE, ...){
+summary.interVA <- function(object, top = 5, id = NULL, InterVA.rule = TRUE, ...){
 	if(is.null(object$dev)){
 		data("causetext", envir = environment())
     	causetext <- get("causetext", envir  = environment())
@@ -58,7 +58,7 @@ summary.interVA <- function(object, top = 5, id = NULL, InterVA = TRUE, ...){
 
     if(is.null(dist)){cat("No va probability found in input"); return}   
     ## Add the probabilities together
-	if(!InterVA){
+	if(!InterVA.rule){
         for(i in 1:length(va)){
             if(is.null(va[[i]][14])) {undeter = undeter + 1; next}
             this.dist <- unlist(va[[i]][14])
@@ -99,6 +99,7 @@ summary.interVA <- function(object, top = 5, id = NULL, InterVA = TRUE, ...){
 		out$csmf.ordered <- csmf[order(csmf[,2], decreasing = TRUE),]
 	}
 
+	out$InterVA.rule <- InterVA.rule
 	class(out) <- "interVA_summary"
 	return(out)
 }
@@ -123,6 +124,11 @@ print.interVA_summary <- function(x, ...){
 	# print population summary
 	}else{
 		cat(paste("InterVA-4 fitted on", x$N, "deaths\n"))
+		if(x$InterVA.rule){
+			cat("CSMF calculated using reported causes by InterVA-4 only\nThe remaining probabilities are assigned to 'Undetermined'\n")
+		}else{
+			cat("CSMF calculated using distribution over all causes\nwithout 'Undetermined' category\n")
+		}
 		cat("\n")
 		cat(paste("Top", x$top,  "CSMFs:\n"))
 		csmf.out.ordered <- x$csmf.ordered[1:x$top, ]

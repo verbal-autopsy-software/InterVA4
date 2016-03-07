@@ -91,8 +91,8 @@ CSMF.interVA4 <- function(va){
 #' @param top.aggregate Integer indicating how many causes from the top need to go into
 #' summary. The rest of the probabilities goes into an extra category
 #' "Undetermined".  When set to NULL, default is all causes to be considered.
-#' This is only used when \code{InterVA} set to "FALSE".
-#' @param InterVA If it is set to "TRUE", only the top 3 causes reported by 
+#' This is only used when \code{InterVA.rule} set to "FALSE".
+#' @param InterVA.rule If it is set to "TRUE", only the top 3 causes reported by 
 #' InterVA4 is calculated into CSMF as in InterVA4. The rest of probabilities 
 #' goes into an extra category "Undetermined". Default set to "FALSE".
 #' @param noplot A logical value indicating whether the plot will be shown. If
@@ -111,9 +111,9 @@ CSMF.interVA4 <- function(va){
 #' @keywords interVA
 #' 
 #' 
-Population.summary<-function (va, top.aggregate = NULL, InterVA = FALSE, noplot = FALSE, type="bar",  min.prob = 0.01, ... ) {
+Population.summary<-function (va, top.aggregate = NULL, InterVA.rule = FALSE, noplot = FALSE, type="bar",  min.prob = 0.01, ... ) {
     .Deprecated("CSMF")
-    CSMF(va, top.aggregate = NULL, InterVA = FALSE, noplot = FALSE, type="bar",  min.prob = 0.01, ... )
+    CSMF(va, top.aggregate = NULL, InterVA.rule = FALSE, noplot = FALSE, type="bar",  min.prob = 0.01, ... )
 }
 
 
@@ -127,8 +127,8 @@ Population.summary<-function (va, top.aggregate = NULL, InterVA = FALSE, noplot 
 #' @param top.aggregate Integer indicating how many causes from the top need to go into
 #' summary. The rest of the probabilities goes into an extra category
 #' "Undetermined".  When set to NULL, default is all causes to be considered.
-#' This is only used when \code{InterVA} set to "FALSE".
-#' @param InterVA If it is set to "TRUE", only the top 3 causes reported by 
+#' This is only used when \code{InterVA.rule} set to "FALSE".
+#' @param InterVA.rule If it is set to "TRUE", only the top 3 causes reported by 
 #' InterVA4 is calculated into CSMF as in InterVA4. The rest of probabilities 
 #' goes into an extra category "Undetermined". Default set to "FALSE".
 #' @param noplot A logical value indicating whether the plot will be shown. If
@@ -163,7 +163,7 @@ Population.summary<-function (va, top.aggregate = NULL, InterVA = FALSE, noplot 
 #' ## This is equivalent to using CSMF.interVA4() command Note that
 #' ## it's different from using all top 3 causses, since they may not 
 #' ## all be reported 
-#' CSMF.summary <- CSMF(sample.output, InterVA = TRUE, 
+#' CSMF.summary <- CSMF(sample.output, InterVA.rule = TRUE, 
 #'    noplot = TRUE)
 #' 
 #' ## Population level summary using pie chart
@@ -180,7 +180,7 @@ Population.summary<-function (va, top.aggregate = NULL, InterVA = FALSE, noplot 
 #'   top.plot = 5, main = "Top 5 population COD distribution", 
 #'   cex.main = 1)
 #' 
-CSMF <-function (va, top.aggregate = NULL, InterVA = FALSE, noplot = FALSE, type="bar",  top.plot = 10, min.prob = 0, ... ) {
+CSMF <-function (va, top.aggregate = NULL, InterVA.rule = FALSE, noplot = FALSE, type="bar",  top.plot = 10, min.prob = 0, ... ) {
 	
     ## Check if there is a valid va object
     if(class(va) == "interVA"){
@@ -222,7 +222,7 @@ CSMF <-function (va, top.aggregate = NULL, InterVA = FALSE, noplot = FALSE, type
 
     if(is.null(dist)){cat("No va probability found in input"); return}   
     ## Add the probabilities together
-	if(!InterVA){
+	if(!InterVA.rule){
         for(i in 1:length(va)){
             if(is.null(va[[i]][14])) {undeter = undeter + 1; next}
             this.dist <- unlist(va[[i]][14])
@@ -273,7 +273,7 @@ CSMF <-function (va, top.aggregate = NULL, InterVA = FALSE, noplot = FALSE, type
     }
     ## Make bar plot upon request
     if( type == "bar"){
-        dist.cod.min <- dist.cod[dist.cod > min.prob ]
+        dist.cod.min <- dist.cod[dist.cod >= min.prob ]
         dist.cod.min <- sort(dist.cod.min, decreasing = FALSE)
         par(las = 2)
         par(mar = c(5,15,4,2))

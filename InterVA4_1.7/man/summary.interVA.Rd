@@ -4,7 +4,8 @@
 \alias{summary.interVA}
 \title{Summary of the results obtained from InterVA4 algorithm}
 \usage{
-\method{summary}{interVA}(object, top = 5, id = NULL, InterVA = TRUE, ...)
+\method{summary}{interVA}(object, top = 5, id = NULL, InterVA.rule = TRUE,
+  ...)
 }
 \arguments{
 \item{object}{fitted object from \code{InterVA()}}
@@ -13,7 +14,7 @@
 
 \item{id}{the ID of a specific death to show}
 
-\item{InterVA}{If it is set to "TRUE", only the top 3 causes reported by
+\item{InterVA.rule}{If it is set to "TRUE", only the top 3 causes reported by
 InterVA4 is calculated into CSMF as in InterVA4. The rest of probabilities
 goes into an extra category "Undetermined". Default set to "TRUE".}
 

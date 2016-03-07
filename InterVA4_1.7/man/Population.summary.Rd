@@ -4,7 +4,7 @@
 \alias{Population.summary}
 \title{Summarize and plot a population level distribution of va probabilities.}
 \usage{
-Population.summary(va, top.aggregate = NULL, InterVA = FALSE,
+Population.summary(va, top.aggregate = NULL, InterVA.rule = FALSE,
   noplot = FALSE, type = "bar", min.prob = 0.01, ...)
 }
 \arguments{
@@ -13,9 +13,9 @@ Population.summary(va, top.aggregate = NULL, InterVA = FALSE,
 \item{top.aggregate}{Integer indicating how many causes from the top need to go into
 summary. The rest of the probabilities goes into an extra category
 "Undetermined".  When set to NULL, default is all causes to be considered.
-This is only used when \code{InterVA} set to "FALSE".}
+This is only used when \code{InterVA.rule} set to "FALSE".}
 
-\item{InterVA}{If it is set to "TRUE", only the top 3 causes reported by
+\item{InterVA.rule}{If it is set to "TRUE", only the top 3 causes reported by
 InterVA4 is calculated into CSMF as in InterVA4. The rest of probabilities
 goes into an extra category "Undetermined". Default set to "FALSE".}
 
