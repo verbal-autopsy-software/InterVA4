@@ -40,7 +40,7 @@ CSMF.interVA4 <- function(va){
     ## Check if there is a valid va object
     if(length(va) < 1){
         cat("No va object found")
-        return
+        return()
     }
     ## Initialize the population distribution
     dist <- NULL
@@ -206,7 +206,7 @@ CSMF <-function (va, top.aggregate = NULL, InterVA.rule = FALSE, noplot = FALSE,
 
     if(length(va) < 1){
 		cat("No va object found")
-		return
+		return()
 	}
     ## Initialize the population distribution
     dist <- NULL
@@ -220,7 +220,7 @@ CSMF <-function (va, top.aggregate = NULL, InterVA.rule = FALSE, noplot = FALSE,
     if(is.null(top.aggregate)) top.aggregate <- length(causeindex)
     undeter <- 0
 
-    if(is.null(dist)){cat("No va probability found in input"); return}   
+    if(is.null(dist)){cat("No va probability found in input"); return()}   
     ## Add the probabilities together
 	if(!InterVA.rule){
         for(i in 1:length(va)){
@@ -249,7 +249,7 @@ CSMF <-function (va, top.aggregate = NULL, InterVA.rule = FALSE, noplot = FALSE,
     ## Check if there is CODs above the minimum cut-off for prob
     if(max(dist.cod) < min.prob){
         cat("No COD larger than the minimum probability cut off line")
-        return
+        return()
     }
     if(noplot){
     		return(dist.cod)
@@ -332,7 +332,7 @@ InterVA.plot <- function(va, type="bar", min.prob = 0.01, ... ){
         causeindex <- 1:length(causenames)
     }else{
         cat("Cause of death undetermined for this case\n")
-        return
+        return()
     }
 
     # fix for removing the first 3 preg related death in standard input
@@ -347,7 +347,7 @@ InterVA.plot <- function(va, type="bar", min.prob = 0.01, ... ){
     ## Check if there is a valid va object
 	if(length(va) < 1){
 		cat("No va object found")
-		return
+		return()
 	}
     ## Find the probability distribution
 	dist <- unlist(va[14])
@@ -355,7 +355,7 @@ InterVA.plot <- function(va, type="bar", min.prob = 0.01, ... ){
     ## Check if there is CODs above the minimum cut-off for prob
     if(max(dist.cod) < min.prob){
         cat("No COD larger than the minimum probability cut off line")
-        return
+        return()
     }
     names(dist.cod)<-causenames
     ## Make pie plot upon request    

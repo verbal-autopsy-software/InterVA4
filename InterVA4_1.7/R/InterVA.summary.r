@@ -56,7 +56,7 @@ summary.interVA <- function(object, top = 5, id = NULL, InterVA.rule = TRUE, ...
     ## determine how many causes from top need to be summarized
     undeter <- 0
 
-    if(is.null(dist)){cat("No va probability found in input"); return}   
+    if(is.null(dist)){cat("No va probability found in input"); return()}   
     ## Add the probabilities together
 	if(!InterVA.rule){
         for(i in 1:length(va)){

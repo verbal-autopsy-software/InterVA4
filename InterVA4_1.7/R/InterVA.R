@@ -111,7 +111,7 @@ save.va <- function(x, filename, write){
     ## The output is a .csv file.
     ##
     ## Delete the full probability distribution.
-    if(!write){return}
+    if(!write){return()}
 
     x <- x[-14]
     x <- as.matrix(x)
@@ -125,7 +125,7 @@ save.va.prob <- function(x, filename, write){
     ## The output is a .csv file.
     ##
     ## Extract the full probability distribution.
-    if(!write){return}
+    if(!write){return()}
 
     prob <- unlist(x[14])
     x <- x[-14]
