@@ -37,11 +37,11 @@ should be appended to the existing file.}
 will be included in the output causes.}
 
 \item{replicate}{A logical value indicating whether or not the calculation
-should replicate original InterVA4 software exactly.If replicate = F, causes
+should replicate original InterVA4 software (version 4.02) exactly. If replicate = F, causes
 with small probability are not dropped out of calculation in intermediate
 steps, and a possible bug in original InterVA4 implementation is fixed.  If
 replicate=T, then the output values will be exactly as they would be from
-calling the InterVA4 program. Since version 1.6, two control variables are added
+calling the InterVA4 program (version 4.02). If  replicate=F, the output values will be the same as calling the InterVA4 program (version 4.03). Since version 1.7.3, setting replicate to be FALSE also includes changes to data checking rules and pre-set conditional probabilities to be the same as the official version 4.03 software. Since version 1.6, two control variables are added
 to control the two bugs respectively. Setting this to TRUE will overwrite both to
 TRUE.}
 

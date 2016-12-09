@@ -55,13 +55,30 @@ NULL
 
 
 
-#' Conditional probability of InterVA4
+#' Conditional probability of InterVA4.02
 #' 
 #' This is the table of conditional probabilities of symptoms given CODs. The
-#' values are from InterVA-4.1.
+#' values are from InterVA-4.02.
 #' 
 #' 
 #' @name probbase
+#' @docType data
+#' @format A data frame with 246 observations on 81 variables. Each observation
+#' is the conditional probability.
+#' @keywords datasets
+#' @examples
+#' 
+#' data(probbase)
+#' 
+NULL
+
+#' Conditional probability of InterVA4.03
+#' 
+#' This is the table of conditional probabilities of symptoms given CODs. The
+#' values are from InterVA-4.03.
+#' 
+#' 
+#' @name probbase3
 #' @docType data
 #' @format A data frame with 246 observations on 81 variables. Each observation
 #' is the conditional probability.
