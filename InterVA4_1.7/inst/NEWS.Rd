@@ -6,7 +6,12 @@
 
 \newcommand{\CRANpkg}{\href{http://CRAN.R-project.org/package=#1}{\pkg{#1}}}
 \newcommand{\sspace}{\ifelse{latex}{\out{~}}{ }}
-
+\section{Changes in version 1.7.4 (2017-05-26)}{
+ \itemize{ 
+    \item Update license to GPL-3
+    \item Add author Peter Byass
+    }
+}
 \section{Changes in version 1.7.3 (2016-12-08)}{
   \itemize{ 
     \item Update the built-in conditional probability matrix to be consistent with the released InterVA-4.03 software.
