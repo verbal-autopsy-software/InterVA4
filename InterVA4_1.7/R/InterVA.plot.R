@@ -29,11 +29,13 @@ CSMF.interVA4 <- function(va){
     }
    
     # fix for removing the first 3 preg related death in standard input
+    include.preg <- FALSE
     if(causenames[1] == "Not pregnant or recently delivered" &&
         causenames[2] == "Pregnancy ended within 6 weeks of death" &&
         causenames[3] == "Pregnant at death"){
             causeindex <- causeindex[-c(1:3)]
-            causenames <- causenames[-c(1:3)]    
+            causenames <- causenames[-c(1:3)]  
+            include.preg <- TRUE  
     }
 
 
@@ -56,6 +58,8 @@ CSMF.interVA4 <- function(va){
     for(i in 1:length(va)){
         if(is.null(va[[i]][14])) next
         this.dist <- unlist(va[[i]][14])
+        if(include.preg) this.dist[1:3] <- 0
+        
         if(max(this.dist) < 0.4){
           undeter <- undeter + sum(this.dist)  
         }else{

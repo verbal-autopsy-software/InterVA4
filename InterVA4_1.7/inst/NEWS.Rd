@@ -6,6 +6,11 @@
 
 \newcommand{\CRANpkg}{\href{http://CRAN.R-project.org/package=#1}{\pkg{#1}}}
 \newcommand{\sspace}{\ifelse{latex}{\out{~}}{ }}
+\section{Changes in version 1.7.5 (2018-02-19)}{
+ \itemize{ 
+    \item Fix error in extracting CSMF for pregnancy related death
+    }
+}
 \section{Changes in version 1.7.4 (2017-05-26)}{
  \itemize{ 
     \item Update license to GPL-3
