@@ -8,13 +8,10 @@ This is an R package replicating InterVA-4 software. For stable version of the p
 If you have any questions regarding this package, or have concerns/find bugs/have new ideas in better implementations to share, please contact Richard Li at lizehang@uw.edu. 
 
 ## What's new
-#### version 1.7.1
-- Minor bug fix
-- New version numbering rule
+- [CRAN version](https://cran.r-project.org/web/packages/InterVA4/news.html)
+- [Current developer version (1.7.x)](InterVA4_1.7/inst/NEWS.Rd)
 
-#### version 1.7
-- Minor changes in package structure for forward compatibility with [openVA package](https://github.com/richardli/openVA)
-
+## Old news
 #### version 1.6
 - Added CSMF.interVA4() function for CSMF calculation as suggested in InterVA4 software.
 - Renamed the function Population.summary() into CSMF() as to make the name consistent with CSMF.interVA4().
