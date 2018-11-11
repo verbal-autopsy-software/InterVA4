@@ -401,20 +401,20 @@ save.va.prob <- function(x, filename, write){
         }
         if(which.max(prob_A) == 1 && prob_A[1] != 0 && reproductiveAge == 1){
             preg_state <- "nrp"
-            lik.preg <- round(prob_A[1]/sum(prob_A)*100)
+            lik.preg <- as.numeric(round(prob_A[1]/sum(prob_A)*100))
         }
         if(which.max(prob_A) == 2 && prob_A[2] != 0 && reproductiveAge == 1){
             preg_state <- "pr6w"
-            lik.preg <- round(prob_A[2]/sum(prob_A)*100)
+            lik.preg <- as.numeric(round(prob_A[2]/sum(prob_A)*100))
         }
         if(which.max(prob_A) == 3 && prob_A[3] != 0 && reproductiveAge == 1){
             preg_state <- "preg"
-            lik.preg <- round(prob_A[3]/sum(prob_A)*100)
+            lik.preg <- as.numeric(round(prob_A[3]/sum(prob_A)*100))
         }
         
         ## Calculate likelihood of marternal death
         lik_mat <- " "
-        if(reproductiveAge == 1 && sum(prob_A) != 0) lik_mat <- round((prob_A[2]+prob_A[3])/sum(prob_A)*100)
+        if(reproductiveAge == 1 && sum(prob_A) != 0) lik_mat <- as.numeric(round((prob_A[2]+prob_A[3])/sum(prob_A)*100))
         
         ## Normalize the probability of CODs
         if(sum(prob_B) != 0)  prob_B<-prob_B/sum(prob_B)

@@ -4,8 +4,8 @@
 \alias{summary.interVA}
 \title{Summary of the results obtained from InterVA4 algorithm}
 \usage{
-\method{summary}{interVA}(object, top = 5, id = NULL, InterVA.rule = TRUE,
-  ...)
+\method{summary}{interVA}(object, top = 5, id = NULL,
+  InterVA.rule = TRUE, ...)
 }
 \arguments{
 \item{object}{fitted object from \code{InterVA()}}
