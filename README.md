@@ -1,4 +1,4 @@
-# InterVA4 [![Build Status](https://travis-ci.org/verbal-autopsy-software/InterVA4.svg?branch=master)](https://travis-ci.org/verbal-autopsy-software/InterVA4) [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/InterVA4)](https://cran.r-project.org/package=InterVA4)
+# InterVA4 [![Build Status](https://travis-ci.org/verbal-autopsy-software/InterVA4.svg?branch=master)](https://travis-ci.org/verbal-autopsy-software/InterVA4) [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/InterVA4)](https://cran.r-project.org/package=InterVA4) [![](https://cranlogs.r-pkg.org/badges/InterVA4)](https://cran.r-project.org/package=InterVA4) [![](https://cranlogs.r-pkg.org/badges/grand-total/InterVA4?color=orange)](https://cran.r-project.org/package=InterVA4)
 
 InterVA4 R replicate package
 
