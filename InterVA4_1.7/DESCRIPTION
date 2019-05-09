@@ -8,3 +8,5 @@ Maintainer: Zehang Li <lizehang@uw.edu>
 Description: Provides an R version of the 'InterVA4' software (<http://www.interva.net>) for coding cause of death from verbal autopsies. It also provides simple graphical representation of individual and population level statistics.
 License: GPL-3
 RoxygenNote: 6.1.0
+Suggests: 
+    testthat
