@@ -203,7 +203,7 @@ save.va.prob <- function(x, filename, write){
     count.changelabel = 0
     for(i in 1:S){
         if(tolower(colnames(Input)[i]) != tolower(valabels)[i]){
-            warning(paste("Input columne '", colnames(Input)[i], "' does not match InterVA standard: '", 
+            warning(paste("Input column '", colnames(Input)[i], "' does not match InterVA standard: '", 
                     valabels[i], "'", sep = ""),
                     call. = FALSE, immediate. = TRUE)
             count.changelabel = count.changelabel + 1
@@ -412,7 +412,7 @@ save.va.prob <- function(x, filename, write){
             lik.preg <- as.numeric(round(prob_A[3]/sum(prob_A)*100))
         }
         
-        ## Calculate likelihood of marternal death
+        ## Calculate likelihood of maternal death
         lik_mat <- " "
         if(reproductiveAge == 1 && sum(prob_A) != 0) lik_mat <- as.numeric(round((prob_A[2]+prob_A[3])/sum(prob_A)*100))
         
