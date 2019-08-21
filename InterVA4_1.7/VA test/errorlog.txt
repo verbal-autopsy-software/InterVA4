@@ -1,0 +1,2 @@
+Error log built for InterVA 2019-05-09 12:51:34 
+100128  Error in indicators: No symptoms specified  
