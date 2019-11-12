@@ -46,8 +46,7 @@ NULL
 #' @examples
 #' 
 #' data(SampleInput)
-#' sample.output <- InterVA(SampleInput, HIV = "h", Malaria = "v", directory = "VA test", 
-#'     filename = "VA_result", output = "extended", append = FALSE)
+#' sample.output <- InterVA(SampleInput, HIV = "h", Malaria = "v", write=FALSE)
 #' 
 NULL
 

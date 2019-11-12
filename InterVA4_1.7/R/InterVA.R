@@ -71,12 +71,10 @@
 #' ## orders match interVA4 standard input this can be monitored by checking
 #' ## the warnings of column names
 #' 
-#' sample.output1 <- InterVA(SampleInput, HIV = "h", Malaria = "l", directory = "VA test", 
-#'     filename = "VA_result", output = "extended", append = FALSE, replicate = FALSE)
+#' sample.output1 <- InterVA(SampleInput, HIV = "h", Malaria = "l", write=FALSE, replicate = FALSE)
 #' 
 #' ## to get causes of death with group code for further usage
-#' sample.output2 <- InterVA(SampleInput, HIV = "h", Malaria = "l", directory = "VA test", 
-#'     filename = "VA_result_wt_code", output = "classic", append = FALSE, 
+#' sample.output2 <- InterVA(SampleInput, HIV = "h", Malaria = "l", write=FALSE,
 #'     replicate = FALSE, groupcode = TRUE)
 #' 
 InterVA<-function(Input, HIV, Malaria, directory = NULL, filename = "VA_result", output="classic", append=FALSE, groupcode = FALSE, replicate = FALSE, replicate.bug1 = FALSE, replicate.bug2 = FALSE, write = TRUE, ...){

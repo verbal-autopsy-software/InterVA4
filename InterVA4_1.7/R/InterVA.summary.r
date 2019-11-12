@@ -18,8 +18,7 @@
 #' ## orders match interVA4 standard input this can be monitored by checking
 #' ## the warnings of column names
 #' 
-#' sample.output1 <- InterVA(SampleInput, HIV = "h", Malaria = "l", directory = "VA test", 
-#'     filename = "VA_result", output = "extended", append = FALSE, replicate = FALSE)
+#' sample.output1 <- InterVA(SampleInput, HIV = "h", Malaria = "l", write=FALSE, replicate = FALSE)
 #' 
 #' summary(sample.output1)
 #' summary(sample.output1, top = 10)
