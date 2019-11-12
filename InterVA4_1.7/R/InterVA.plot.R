@@ -61,7 +61,7 @@ CSMF.interVA4 <- function(va){
         if(include.preg) this.dist[1:3] <- 0
         
         if(max(this.dist) < 0.4){
-          undeter <- undeter + sum(this.dist)  
+          undeter <- undeter + ifelse(sum(this.dist) == 0, 1, sum(this.dist))
         }else{
             cutoff.3 <- this.dist[order(this.dist, decreasing = TRUE)[3]]
             cutoff.2 <- this.dist[order(this.dist, decreasing = TRUE)[2]]

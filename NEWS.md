@@ -1,8 +1,9 @@
 # InterVA4 - changes
 
-Version 1.7.6 (2018-11-11) 
+Version 1.7.6 (2019-11-11) 
 ==========================
 * Fix output csv file format error
+* Fix error that CSMF calculation omitted deaths with 100% undetermined.
 
 Version 1.7.5 (2018-02-19) 
 ==========================
