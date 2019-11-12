@@ -9,7 +9,7 @@ If you have any questions regarding this package, or have concerns/find bugs/hav
 
 ## What's new
 - [CRAN version](https://cran.r-project.org/web/packages/InterVA4/news.html)
-- [Current developer version (1.7.x)](InterVA4_1.7/inst/NEWS.Rd)
+- [Current developer version (1.7.x)](InterVA4_1.7/NEWS.md)
 
 ## Old news
 #### version 1.6
